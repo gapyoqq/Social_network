@@ -7,8 +7,8 @@ function MyPosts() {
         <div>
             My posts
         </div>
-        <Post/>
-        <Post/>
+        <Post message = 'privet' likesCount ={15}/>
+        <Post message = 'how you doing?' likesCount ={20}/>
     </div>
 }
 

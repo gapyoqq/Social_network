@@ -1,7 +1,12 @@
 import React from "react";
 import classes from './Post.module.css'
 
-function Post() {
+
+type PostPropsType = {
+    message: string
+    likesCount: number
+}
+function Post(props:PostPropsType) {
     return <div>
         <div>
             <textarea></textarea>
@@ -10,9 +15,9 @@ function Post() {
         <div>
             <div className={classes.item}>
                 <img src={'https://pbs.twimg.com/profile_images/563771636076118016/GUQ_0-mU.png'}/>
-                Post 1
+                {props.message}
                 <div>
-                <span>like</span>
+                <span>{props.likesCount}</span>
                 </div>
             </div>
         </div>
