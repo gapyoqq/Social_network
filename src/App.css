@@ -11,27 +11,7 @@ width: 1200px;
     grid-gap: 10px
 }
 
-.header {
-    grid-area: h;
-    background-color: green;
-}
 
-.header img {
-    margin-top: 10px;
-    margin-left: 7px;
-    width: 30px;
-}
 
-.nav {
-    width: 100px;
-    grid-area: n;
-    background-color: cadetblue;
-}
 
-.content {
-    grid-area: c;
-    background-color: lightcoral;
-}
-.content img {
-    width: 1200px;
-}
+

@@ -4,13 +4,14 @@ import MessageIcon from "@material-ui/icons/Message";
 import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import SettingsIcon from "@material-ui/icons/Settings";
+import classes from './Navbar.module.css'
 
 function Navbar() {
-    return <nav className='nav'>
-        <div>
+    return <nav className={classes.nav}>
+        <div className={classes.item}>
             <a href=''><HomeIcon/>Profile</a>
         </div>
-        <div>
+        <div className={`${classes.item} ${classes.active}`}>
             <a href=''><MessageIcon/>Messages</a>
         </div>
         <div>
