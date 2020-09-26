@@ -10,19 +10,19 @@ import {NavLink} from "react-router-dom";
 function Navbar() {
     return <nav className={classes.nav}>
         <div className={classes.item}>
-            <NavLink to='/profile'><HomeIcon/>Profile</NavLink>
+            <NavLink to='/profile' activeClassName={classes.active}><HomeIcon/>Profile</NavLink>
         </div>
         <div className={`${classes.item} ${classes.active}`}>
-            <NavLink to='/dialogs'><MessageIcon/>Messages</NavLink>
+            <NavLink to='/dialogs' activeClassName={classes.active}><MessageIcon/>Messages</NavLink>
         </div>
-        <div>
-            <NavLink to='/news'><ChromeReaderModeIcon/>News</NavLink>
+        <div className={classes.item}>
+            <NavLink to='/news' activeClassName={classes.active}><ChromeReaderModeIcon/>News</NavLink>
         </div>
-        <div>
-            <NavLink to='/music'><PlaylistPlayIcon/> Music</NavLink>
+        <div className={classes.item}>
+            <NavLink to='/music' activeClassName={classes.active}><PlaylistPlayIcon/> Music</NavLink>
         </div>
-        <div>
-            <NavLink to='/settings'><SettingsIcon/> Settings</NavLink>
+        <div className={classes.item}>
+            <NavLink to='/settings' activeClassName={classes.active}><SettingsIcon/> Settings</NavLink>
         </div>
     </nav>
 }

@@ -2,12 +2,14 @@
     width: 100px;
     grid-area: n;
     background-color: cadetblue;
+    padding: 20px;
 }
 
-.item {
+.item a {
     color: white;
+    text-decoration: none;
 }
 
-.item.active {
-    color: gold;
+.item a.active {
+    color: blue;
 }
