@@ -5,23 +5,24 @@ import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import SettingsIcon from "@material-ui/icons/Settings";
 import classes from './Navbar.module.css'
+import {NavLink} from "react-router-dom";
 
 function Navbar() {
     return <nav className={classes.nav}>
         <div className={classes.item}>
-            <a href=''><HomeIcon/>Profile</a>
+            <NavLink to='/profile'><HomeIcon/>Profile</NavLink>
         </div>
         <div className={`${classes.item} ${classes.active}`}>
-            <a href=''><MessageIcon/>Messages</a>
+            <NavLink to='/dialogs'><MessageIcon/>Messages</NavLink>
         </div>
         <div>
-            <a href=''><ChromeReaderModeIcon/>News</a>
+            <NavLink to='/news'><ChromeReaderModeIcon/>News</NavLink>
         </div>
         <div>
-            <a href=''><PlaylistPlayIcon/> Music</a>
+            <NavLink to='/music'><PlaylistPlayIcon/> Music</NavLink>
         </div>
         <div>
-            <a href=''><SettingsIcon/> Settings</a>
+            <NavLink to='/settings'><SettingsIcon/> Settings</NavLink>
         </div>
     </nav>
 }
