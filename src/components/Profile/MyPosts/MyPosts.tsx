@@ -1,14 +1,15 @@
 import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {PostsDataType} from "../../../redux/state";
 
-function MyPosts() {
-    let postsData = [
-        {id: 1, likesCount: 13, message: 'Hi, how are you?'},
-        {id: 2, likesCount: 15, message: 'Love you)'},
-        {id: 3, likesCount: 11, message: 'Np'},
+type PropsType = {
+    postsData: PostsDataType[]
+}
 
-    ]
+
+function MyPosts(props:PropsType) {
+
     return <div className={classes.postsBlock}>
         <div>
             <h3>My posts</h3>
@@ -20,7 +21,7 @@ function MyPosts() {
             <button> Add post</button>
         </div>
         <div className={classes.posts}>
-            {postsData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)}
+            {props.postsData.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)}
         </div>
     </div>
 }
