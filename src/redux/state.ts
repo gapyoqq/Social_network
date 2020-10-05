@@ -11,12 +11,9 @@ export type MessagesDataType = {
     id: number
     message: string
 }
-
-
 type ProfilePageType = {
     postsData: PostsDataType[]
 }
-
 type MessagesPageType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]
@@ -50,4 +47,14 @@ export let state: RootStateType = {
             {id: 3, message: 'Np'}
         ]
     }
+}
+
+
+export let addPost = (postMessage:string) => {
+    let newPost: PostsDataType = {
+        id: 5,
+        message: postMessage,
+        likesCount: 10
+    }
+    state.profilePage.postsData.push(newPost)
 }

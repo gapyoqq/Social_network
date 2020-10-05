@@ -9,6 +9,7 @@ import {RootStateType} from "./redux/state";
 
 type PropsType = {
     state: RootStateType
+    addPost:(postMessage:string) => void
 }
 
 
@@ -20,10 +21,10 @@ function App(props:PropsType) {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path = '/dialogs' render={()=> <Dialogs dialogsData={props.state.messagesPage.dialogsData} messagesData={props.state.messagesPage.messagesData}/>} />
-                <Route path = '/profile' render={() => <Profile postsData ={props.state.profilePage.postsData}/>} />
-                <Route path = '/news' component={Profile}/>
+                <Route path = '/profile' render={() => <Profile postsData ={props.state.profilePage.postsData} addPost={props.addPost}/>} />
+                {/*<Route path = '/news' component={Profile}/>
                 <Route path = '/music' component={Profile}/>
-                <Route path = '/settings' component={Profile}/>
+                <Route path = '/settings' component={Profile}/>*/}
             </div>
         </div>
         </BrowserRouter>

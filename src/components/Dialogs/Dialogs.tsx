@@ -5,20 +5,13 @@ import {MessageItem} from "./Message/Message";
 import {DialogsDataType, MessagesDataType} from "../../redux/state";
 
 
-
 type PropsType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType []
 }
 
 
-
-
 function Dialogs(props: PropsType) {
-
-
-
-
     return <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
             {props.dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>)
@@ -26,9 +19,12 @@ function Dialogs(props: PropsType) {
         </div>
         <div className={classes.messagesItems}>
             {props.messagesData.map(m => <MessageItem message={m.message} id={m.id}/>)}
-            </div>
-            </div>
-            }
+        </div>
+        <div><textarea></textarea>
+            <button>Send</button>
+        </div>
+    </div>
+}
 
 
-            export default Dialogs
+export default Dialogs
