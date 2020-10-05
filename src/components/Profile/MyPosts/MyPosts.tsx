@@ -14,7 +14,7 @@ function MyPosts() {
             <h3>My posts</h3>
         </div>
         <div>
-            <textarea></textarea>
+            <textarea >Write a message... </textarea>
         </div>
         <div>
             <button> Add post</button>
