@@ -5,15 +5,12 @@ import classes from './Post.module.css'
 type PostPropsType = {
     message: string
     likesCount: number
+    id: number
 }
 
 function Post(props: PostPropsType) {
-    return <div>
-        <div>
-            <textarea></textarea>
-            <button> Add post</button>
-        </div>
-        <div>
+    return <div >
+                <div>
             <div className={classes.item}>
                 <img alt={'image'} src={'https://pbs.twimg.com/profile_images/563771636076118016/GUQ_0-mU.png'}/>
                 {props.message}
