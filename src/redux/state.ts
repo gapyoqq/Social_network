@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../index";
+
 export type PostsDataType = {
     id: number
     likesCount: number
@@ -11,8 +13,9 @@ export type MessagesDataType = {
     id: number
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     postsData: PostsDataType[]
+    newPostText: string
 }
 type MessagesPageType = {
     dialogsData: DialogsDataType[]
@@ -31,7 +34,8 @@ export let state: RootStateType = {
             {id: 1, likesCount: 13, message: 'Hi, how are you?'},
             {id: 2, likesCount: 15, message: 'Love you)'},
             {id: 3, likesCount: 11, message: 'Np'}
-        ]
+        ],
+        newPostText: ''
     },
     messagesPage: {
         dialogsData: [
@@ -50,11 +54,19 @@ export let state: RootStateType = {
 }
 
 
-export let addPost = (postMessage:string) => {
+export let addPostCallback = () => {
     let newPost: PostsDataType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 10
     }
     state.profilePage.postsData.push(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state)
+}
+
+export let UpdateNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText
+
+    rerenderEntireTree(state)
 }

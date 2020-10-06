@@ -9,24 +9,29 @@ import {RootStateType} from "./redux/state";
 
 type PropsType = {
     state: RootStateType
-    addPost:(postMessage:string) => void
+    addPostCallback: () => void
+    UpdateNewPostText: (newText: string) => void
 }
 
 
-function App(props:PropsType) {
+function App(props: PropsType) {
     return (
         <BrowserRouter>
-        <div className="app-wrapper">
-            <Header/>
-            <Navbar/>
-            <div className='app-wrapper-content'>
-                <Route path = '/dialogs' render={()=> <Dialogs dialogsData={props.state.messagesPage.dialogsData} messagesData={props.state.messagesPage.messagesData}/>} />
-                <Route path = '/profile' render={() => <Profile postsData ={props.state.profilePage.postsData} addPost={props.addPost}/>} />
-                {/*<Route path = '/news' component={Profile}/>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs' render={() => <Dialogs dialogsData={props.state.messagesPage.dialogsData}
+                                                                  messagesData={props.state.messagesPage.messagesData}/>}/>
+                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
+                                                                  addPostCallback={props.addPostCallback}
+                                                                  UpdateNewPostText={props.UpdateNewPostText}
+                    />}/>
+                    {/*<Route path = '/news' component={Profile}/>
                 <Route path = '/music' component={Profile}/>
                 <Route path = '/settings' component={Profile}/>*/}
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     );
 }

@@ -5,20 +5,23 @@ import {PostsDataType} from "../../../redux/state";
 
 type PropsType = {
     postsData: PostsDataType[]
-    addPost:(postMessage:string) => void
+    addPostCallback: () => void
+    newPostText: string
+    UpdateNewPostText: (newText: string) => void
 
 }
 
 
 function MyPosts(props: PropsType) {
+    let onPostChange = () => {
+        if (newPostElementRef.current)
+            props.UpdateNewPostText(newPostElementRef.current.value)
+    }
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let newPostElementRef = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
-        let postMessage = newPostElement.current?.value
-        if (postMessage) {
-            props.addPost(postMessage)
-        }
+        props.addPostCallback()
     }
 
     return <div className={classes.postsBlock}>
@@ -26,7 +29,7 @@ function MyPosts(props: PropsType) {
             <h3>My posts</h3>
         </div>
         <div>
-            <textarea ref={newPostElement}></textarea>
+            <textarea onChange={onPostChange} ref={newPostElementRef} value={props.newPostText}/>
         </div>
         <div>
             <button onClick={addPost}>Add post</button>
