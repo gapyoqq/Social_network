@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from "../index";
-
 export type PostsDataType = {
     id: number
     likesCount: number
@@ -21,12 +19,14 @@ type MessagesPageType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]
 }
-
 export type RootStateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
 }
 
+let rerenderEntireTree = () => {
+
+}
 
 export let state: RootStateType = {
     profilePage: {
@@ -54,7 +54,7 @@ export let state: RootStateType = {
 }
 
 
-export let addPostCallback = () => {
+export const addPostCallback = () => {
     let newPost: PostsDataType = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -62,11 +62,14 @@ export let addPostCallback = () => {
     }
     state.profilePage.postsData.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
-export let UpdateNewPostText = (newText:string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
 
-    rerenderEntireTree(state)
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
 }

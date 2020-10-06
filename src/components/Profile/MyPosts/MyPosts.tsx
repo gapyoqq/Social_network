@@ -7,7 +7,7 @@ type PropsType = {
     postsData: PostsDataType[]
     addPostCallback: () => void
     newPostText: string
-    UpdateNewPostText: (newText: string) => void
+    updateNewPostText: (newText: string) => void
 
 }
 
@@ -15,7 +15,7 @@ type PropsType = {
 function MyPosts(props: PropsType) {
     let onPostChange = () => {
         if (newPostElementRef.current)
-            props.UpdateNewPostText(newPostElementRef.current.value)
+            props.updateNewPostText(newPostElementRef.current.value)
     }
 
     let newPostElementRef = React.createRef<HTMLTextAreaElement>()

@@ -1,21 +1,21 @@
 import React from 'react';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {addPostCallback, RootStateType, state, UpdateNewPostText} from "./redux/state";
+import {addPostCallback, RootStateType, state, subscribe, updateNewPostText} from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 
 
-export let rerenderEntireTree = (state: RootStateType) => {
+let rerenderEntireTree = () => {
     ReactDOM.render(
         <App state={state}
-             UpdateNewPostText={UpdateNewPostText}
+             updateNewPostText={updateNewPostText}
              addPostCallback={addPostCallback}/>, document.getElementById('root'))
 
 }
 
-rerenderEntireTree(state)
+rerenderEntireTree()
 
-
+subscribe(rerenderEntireTree)
 
 serviceWorker.unregister();
