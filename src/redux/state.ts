@@ -24,52 +24,63 @@ export type RootStateType = {
     messagesPage: MessagesPageType
 }
 
-let rerenderEntireTree = () => {
 
-}
 
-export let state: RootStateType = {
-    profilePage: {
-        postsData: [
-            {id: 1, likesCount: 13, message: 'Hi, how are you?'},
-            {id: 2, likesCount: 15, message: 'Love you)'},
-            {id: 3, likesCount: 11, message: 'Np'}
-        ],
-        newPostText: ''
+
+export let store = {
+    _state: {
+        profilePage: {
+            postsData: [
+                {id: 1, likesCount: 13, message: 'Hi, how are you?'},
+                {id: 2, likesCount: 15, message: 'Love you)'},
+                {id: 3, likesCount: 11, message: 'Np'}
+            ],
+            newPostText: ''
+        },
+        messagesPage: {
+            dialogsData: [
+                {id: 1, name: 'Andrew'},
+                {id: 2, name: 'Svetlana'},
+                {id: 3, name: 'Alex'},
+                {id: 4, name: 'Petr'},
+                {id: 5, name: 'Maxim'}
+            ],
+            messagesData: [
+                {id: 1, message: 'Hi, how are you?'},
+                {id: 2, message: 'Love you)'},
+                {id: 3, message: 'Np'}
+            ]
+        }
     },
-    messagesPage: {
-        dialogsData: [
-            {id: 1, name: 'Andrew'},
-            {id: 2, name: 'Svetlana'},
-            {id: 3, name: 'Alex'},
-            {id: 4, name: 'Petr'},
-            {id: 5, name: 'Maxim'}
-        ],
-        messagesData: [
-            {id: 1, message: 'Hi, how are you?'},
-            {id: 2, message: 'Love you)'},
-            {id: 3, message: 'Np'}
-        ]
+    _callSubscriber() {
+
+    },
+    addPostCallback() {
+        let newPost: PostsDataType = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: 10
+        }
+        this._state.profilePage.postsData.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber()
+    },
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText
+       this._callSubscriber()
+    },
+    subscribe(observer: () => void) {
+       this._callSubscriber = observer
+    },
+    getState() {
+        return this._state
     }
+
 }
 
 
-export const addPostCallback = () => {
-    let newPost: PostsDataType = {
-        id: 5,
-        message: state.profilePage.newPostText,
-        likesCount: 10
-    }
-    state.profilePage.postsData.push(newPost)
-    state.profilePage.newPostText = ''
-    rerenderEntireTree()
-}
 
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    rerenderEntireTree()
-}
 
-export const subscribe = (observer: () => void) => {
-    rerenderEntireTree = observer
-}
+
+
+
