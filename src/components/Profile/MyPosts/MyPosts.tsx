@@ -1,26 +1,28 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsDataType} from "../../../redux/state";
+import {ActionType, AddPostAC, onPostChangeAC, PostsDataType} from "../../../redux/state";
 
 type PropsType = {
     postsData: PostsDataType[]
     newPostText: string
-    dispatch: (action: any) => void
+    dispatch: (action: ActionType) => void
 
 }
 
 
 function MyPosts(props: PropsType) {
-    const onPostChange = () => {
-        let text = newPostElementRef.current?.value
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
+
+
+
+    const onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value
+        if (text) {
+        props.dispatch(onPostChangeAC(text))}
     }
 
-    let newPostElementRef = React.createRef<HTMLTextAreaElement>()
-
     const addPost = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(AddPostAC())
     }
 
     return <div className={classes.postsBlock}>
@@ -28,7 +30,7 @@ function MyPosts(props: PropsType) {
             <h3>My posts</h3>
         </div>
         <div>
-            <textarea onChange={onPostChange} ref={newPostElementRef} value={props.newPostText}/>
+            <textarea onChange={onPostChange}  value={props.newPostText}/>
         </div>
         <div>
             <button onClick={addPost}>Add post</button>
