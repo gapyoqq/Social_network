@@ -22,12 +22,32 @@ type MessagesPageType = {
 export type RootStateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
+    }
+
+type AddPostActionType = {
+    type: 'ADD-POST'
 }
 
+type ChangeNewTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+type ActionType = AddPostActionType | ChangeNewTextActionType
 
 
 
-export let store = {
+type StoreType ={
+    _state: RootStateType
+    getState: () => RootStateType
+    _callSubscriber: () => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action:ActionType) => void
+    _addPost: () => void
+    _updateNewPostText: (newText: string) => void
+
+}
+
+export let store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -53,27 +73,34 @@ export let store = {
         }
     },
     _callSubscriber() {
-
     },
-    addPostCallback() {
-        let newPost: PostsDataType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 10
-        }
+    _addPost() {let newPost: PostsDataType = {
+        id: 5,
+        message: this._state.profilePage.newPostText,
+        likesCount: 10
+    }
         this._state.profilePage.postsData.push(newPost)
         this._state.profilePage.newPostText = ''
+        this._callSubscriber()},
+    _updateNewPostText (newText:string) {
+        this._state.profilePage.newPostText = newText
         this._callSubscriber()
     },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-       this._callSubscriber()
-    },
+
     subscribe(observer: () => void) {
-       this._callSubscriber = observer
+        this._callSubscriber = observer
     },
     getState() {
         return this._state
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+           this._addPost()
+        }
+        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._updateNewPostText(action.newText)
+        }
     }
 
 }

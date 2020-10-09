@@ -5,23 +5,22 @@ import {PostsDataType} from "../../../redux/state";
 
 type PropsType = {
     postsData: PostsDataType[]
-    addPostCallback: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 
 }
 
 
 function MyPosts(props: PropsType) {
-    let onPostChange = () => {
-        if (newPostElementRef.current)
-            props.updateNewPostText(newPostElementRef.current.value)
+    const onPostChange = () => {
+        let text = newPostElementRef.current?.value
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
     }
 
     let newPostElementRef = React.createRef<HTMLTextAreaElement>()
 
-    let addPost = () => {
-        props.addPostCallback()
+    const addPost = () => {
+        props.dispatch({type: 'ADD-POST'})
     }
 
     return <div className={classes.postsBlock}>

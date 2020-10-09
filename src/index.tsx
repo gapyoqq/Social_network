@@ -9,8 +9,8 @@ import App from "./App";
 let rerenderEntireTree = () => {
     ReactDOM.render(
         <App state={store.getState()}
-             updateNewPostText={store.updateNewPostText.bind(store)}
-             addPostCallback={store.addPostCallback.bind(store)}/>, document.getElementById('root'))
+             dispatch={store.dispatch.bind(store)}
+             />, document.getElementById('root'))
 
 }
 

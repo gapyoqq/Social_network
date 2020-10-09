@@ -9,8 +9,7 @@ import {RootStateType} from "./redux/state";
 
 type PropsType = {
     state: RootStateType
-    addPostCallback: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action:any) => void
 }
 
 
@@ -24,8 +23,7 @@ function App(props: PropsType) {
                     <Route path='/dialogs' render={() => <Dialogs dialogsData={props.state.messagesPage.dialogsData}
                                                                   messagesData={props.state.messagesPage.messagesData}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                                  addPostCallback={props.addPostCallback}
-                                                                  updateNewPostText={props.updateNewPostText}
+                                                                  dispatch={props.dispatch}
                     />}/>
                     {/*<Route path = '/news' component={Profile}/>
                 <Route path = '/music' component={Profile}/>
