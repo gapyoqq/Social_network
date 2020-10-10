@@ -1,16 +1,35 @@
-import {AddPostActionType, ChangeNewTextActionType, MessagesDataType, PostsDataType, ProfilePageType} from "./state";
+import {AddPostACType, OnPostChangeACType,ActionType} from "./store";
+
+export type PostsDataType = {
+    id: number
+    likesCount: number
+    message: string
+}
+export type ProfilePageType = {
+    postsData: PostsDataType[]
+    newPostText: string
+}
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
-export const AddPostAC = (): AddPostActionType => ({type: 'ADD-POST'})
-export const onPostChangeAC = (newText: string ): ChangeNewTextActionType => ({
+export const AddPostAC = (): AddPostACType => ({type: 'ADD-POST'})
+export const onPostChangeAC = (newText: string ): OnPostChangeACType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: newText
 })
 
+let initialState: ProfilePageType = {
+    postsData: [
+        {id: 1, likesCount: 13, message: 'Hi, how are you?'},
+        {id: 2, likesCount: 15, message: 'Love you)'},
+        {id: 3, likesCount: 11, message: 'Np'}
+    ],
+        newPostText: ''
 
-const profileReducer = (state: any, action: any) => {
+}
+
+const profileReducer = (state: ProfilePageType = initialState, action: ActionType ) => {
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT:
             state.newPostText = action.newText

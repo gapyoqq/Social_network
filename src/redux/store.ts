@@ -1,54 +1,14 @@
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import profileReducer, {PostsDataType, ProfilePageType} from "./profileReducer";
+import dialogsReducer, {DialogsPageType, MessagesDataType} from "./dialogsReducer";
 
-export type PostsDataType = {
-    id: number
-    likesCount: number
-    message: string
-}
-export type DialogsDataType = {
-    id: number
-    name: string
-}
-export type MessagesDataType = {
-    id: number
-    message: string
 
-}
-export type ProfilePageType = {
-    postsData: PostsDataType[]
-    newPostText: string
-}
-type MessagesPageType = {
-    dialogsData: DialogsDataType[]
-    messagesData: MessagesDataType[]
-    newMessageText: string
-}
+
 export type RootStateType = {
     profilePage: ProfilePageType
-    dialogsPage: MessagesPageType
+    dialogsPage: DialogsPageType
 }
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type ChangeNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: string
-}
-export type OnMessageChangeACType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessageText: string
-}
-export type AddMessageACType = {
-    type: 'ADD-MESSAGE'
-}
-
-
-export type ActionType = AddPostActionType | ChangeNewTextActionType | OnMessageChangeACType | AddMessageACType
-
-
-type StoreType = {
+export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubscriber: () => void
@@ -61,7 +21,28 @@ type StoreType = {
 
 }
 
-export let store: StoreType = {
+
+
+export type AddPostACType = {
+    type: 'ADD-POST'
+}
+export type OnPostChangeACType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
+export type AddMessageACType = {
+    type: 'ADD-MESSAGE'
+}
+export type OnMessageChangeACType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessageText: string
+}
+
+export type ActionType = AddPostACType | OnPostChangeACType | OnMessageChangeACType | AddMessageACType
+
+
+
+let store: StoreType = {
     _state: {
         profilePage: {
             postsData: [
@@ -125,7 +106,6 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber()

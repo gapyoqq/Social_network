@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionType,PostsDataType} from "../../../redux/state";
-import {AddPostAC, onPostChangeAC} from "../../../redux/profileReducer";
+import {ActionType} from "../../../redux/store";
+import {AddPostAC, onPostChangeAC, PostsDataType} from "../../../redux/profileReducer";
 
 type PropsType = {
     postsData: PostsDataType[]
