@@ -1,3 +1,6 @@
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+
 export type PostsDataType = {
     id: number
     likesCount: number
@@ -23,21 +26,21 @@ type MessagesPageType = {
 }
 export type RootStateType = {
     profilePage: ProfilePageType
-    messagesPage: MessagesPageType
+    dialogsPage: MessagesPageType
 }
 
-type AddPostActionType = {
+export type AddPostActionType = {
     type: 'ADD-POST'
 }
-type ChangeNewTextActionType = {
+export type ChangeNewTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
-type OnMessageChangeACType = {
+export type OnMessageChangeACType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
-type AddMessageACType = {
+export type AddMessageACType = {
     type: 'ADD-MESSAGE'
 }
 
@@ -68,7 +71,7 @@ export let store: StoreType = {
             ],
             newPostText: ''
         },
-        messagesPage: {
+        dialogsPage: {
             dialogsData: [
                 {id: 1, name: 'Andrew'},
                 {id: 2, name: 'Svetlana'},
@@ -101,16 +104,16 @@ export let store: StoreType = {
         this._callSubscriber()
     },
     _updateNewMessageText(newMessageText: string) {
-        this._state.messagesPage.newMessageText = newMessageText
+        this._state.dialogsPage.newMessageText = newMessageText
         this._callSubscriber()
     },
-    _addMessage(){
+    _addMessage() {
         let newMessage: MessagesDataType = {
             id: 1,
-            message: this._state.messagesPage.newMessageText
+            message: this._state.dialogsPage.newMessageText
         }
-        this._state.messagesPage.messagesData.push(newMessage)
-        this._state.messagesPage.newMessageText = ''
+        this._state.dialogsPage.messagesData.push(newMessage)
+        this._state.dialogsPage.newMessageText = ''
         this._callSubscriber()
     },
 
@@ -122,33 +125,15 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            this._addPost()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._updateNewPostText(action.newText)
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._updateNewMessageText(action.newMessageText)
-        } else if (action.type === 'ADD-MESSAGE') {
-            this._addMessage()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber()
     }
 }
 
 
-export const AddMessageAC = (): AddMessageACType => ({type: 'ADD-MESSAGE'})
 
-export const onMessageChangeAC = (newMessageText: string): OnMessageChangeACType => ({
-    type: 'UPDATE-NEW-MESSAGE-TEXT',
-    newMessageText: newMessageText
-})
-
-
-export const AddPostAC = (): AddPostActionType => ({type: 'ADD-POST'})
-
-export const onPostChangeAC = (newText: string ): ChangeNewTextActionType => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: newText
-})
 
 
 

@@ -21,10 +21,10 @@ function App(props: PropsType) {
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs
 
-                    newMessageText={props.state.messagesPage.newMessageText}
+                    newMessageText={props.state.dialogsPage.newMessageText}
                     dispatch={props.dispatch.bind(store)}
-                    dialogsData={props.state.messagesPage.dialogsData}
-                                                              messagesData={props.state.messagesPage.messagesData}/>}/>
+                    dialogsData={props.state.dialogsPage.dialogsData}
+                                                              messagesData={props.state.dialogsPage.messagesData}/>}/>
                 <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
                                                               dispatch={props.dispatch.bind(store)}
                 />}/>

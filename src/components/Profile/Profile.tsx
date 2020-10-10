@@ -9,9 +9,12 @@ type PropsType = {
 }
 
 
+
+
+
 function Profile(props: PropsType) {
     return <div>
-        <ProfileInfo/>
+        <ProfileInfo />
         <MyPosts
 
             postsData={props.profilePage.postsData}
