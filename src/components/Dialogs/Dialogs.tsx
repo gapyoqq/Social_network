@@ -2,13 +2,11 @@ import React, {ChangeEvent} from 'react'
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./Message/Message";
-import {DialogsDataType, MessagesDataType} from "../../redux/dialogsReducer";
+import {DialogsDataType, DialogsPageType, MessagesDataType} from "../../redux/dialogsReducer";
 
 
 type PropsType = {
-    dialogsData: DialogsDataType[]
-    messagesData: MessagesDataType []
-    newMessageText: string
+    dialogsPage: DialogsPageType
     onMessageChange: (text: string) => void
     addMessage: () => void
 }
@@ -30,14 +28,14 @@ function Dialogs(props: PropsType) {
 
     return <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
-            {props.dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>)
+            {props.dialogsPage.dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>)
             }
         </div>
         <div className={classes.messagesItems}>
-            {props.messagesData.map(m => <MessageItem message={m.message} id={m.id}/>)}
+            {props.dialogsPage.messagesData.map(m => <MessageItem message={m.message} id={m.id}/>)}
         </div>
         <div>
-            <textarea value={props.newMessageText} onChange={onMessageChange}/>
+            <textarea value={props.dialogsPage.newMessageText} onChange={onMessageChange}/>
             <button onClick={addMessage}>Send</button>
         </div>
     </div>
