@@ -8,6 +8,7 @@ type PropsType = {}
 
 
 let mapStateToProps = (state: RootStateType) => {
+
     return {
         postsData: state.profilePage.postsData,
         newPostText: state.profilePage.newPostText

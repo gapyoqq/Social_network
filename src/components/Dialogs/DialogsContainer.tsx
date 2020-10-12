@@ -4,6 +4,7 @@ import {StoreType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {ActionType, RootStateType} from "../../redux/store";
+import {Dispatch} from "redux";
 
 
 type PropsType = {
@@ -40,7 +41,7 @@ let mapStateToProps = (state: RootStateType) => {
 
 
 
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = (dispatch:Dispatch) => {
     return {
         addMessage: () => {
             dispatch(AddMessageAC())
