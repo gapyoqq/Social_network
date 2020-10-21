@@ -1,9 +1,9 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType} from "../../redux/store";
 import {ProfilePageType} from "../../redux/profileReducer";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {StoreType} from "../../redux/redux-store";
+import {ActionType, StoreType} from "../../redux/redux-store";
+import MyPosts from "./MyPosts/MyPosts";
 
 type PropsType = {
 

@@ -1,9 +1,8 @@
 import React from 'react'
 import {AddMessageAC, onMessageChangeAC} from "../../redux/dialogsReducer";
-import {StoreType} from "../../redux/redux-store";
+import {ActionType, AppStateType, RootStateType, StoreType} from "../../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {ActionType, RootStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 
 
@@ -33,7 +32,7 @@ type PropsType = {
 }*/
 
 
-let mapStateToProps = (state: RootStateType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsPage: state.dialogsPage
     }

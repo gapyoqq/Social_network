@@ -1,4 +1,4 @@
-import {ActionType, AddMessageACType, OnMessageChangeACType} from "./store";
+import {ActionType} from "./redux-store";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
@@ -18,7 +18,13 @@ export type DialogsPageType = {
     newMessageText: string
 }
 
-
+export type AddMessageACType = {
+    type: 'ADD-MESSAGE'
+}
+export type OnMessageChangeACType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessageText: string
+}
 export const AddMessageAC = (): AddMessageACType => ({type: 'ADD-MESSAGE'})
 export const onMessageChangeAC = (newMessageText: string): OnMessageChangeACType => ({
     type: 'UPDATE-NEW-MESSAGE-TEXT',
@@ -27,7 +33,7 @@ export const onMessageChangeAC = (newMessageText: string): OnMessageChangeACType
 })
 
 
-let initialState:DialogsPageType = {
+let initialState: DialogsPageType = {
     dialogsData: [
         {id: 1, name: 'Andrew'},
         {id: 2, name: 'Svetlana'},
@@ -46,18 +52,26 @@ let initialState:DialogsPageType = {
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType) => {
 
+
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newMessageText
-            return state
-        case ADD_MESSAGE:
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            return {
+                ...state,
+                newMessageText: action.newMessageText
+            }
+        }
+        case ADD_MESSAGE: {
             let newMessage: MessagesDataType = {
                 id: 1,
                 message: state.newMessageText
             }
-            state.messagesData.push(newMessage)
-            state.newMessageText = ''
-            return state
+
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
+        }
         default:
             return state
     }

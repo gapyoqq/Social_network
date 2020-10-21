@@ -28,11 +28,15 @@ function Dialogs(props: PropsType) {
 
     return <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
-            {props.dialogsPage.dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>)
+            {props.dialogsPage.dialogsData.map(d => <DialogItem id={d.id}
+                                                                key={d.id}
+                                                                name={d.name}/>)
             }
         </div>
         <div className={classes.messagesItems}>
-            {props.dialogsPage.messagesData.map(m => <MessageItem message={m.message} id={m.id}/>)}
+            {props.dialogsPage.messagesData.map(m => <MessageItem message={m.message}
+                                                                  key={m.id}
+                                                                  id={m.id}/>)}
         </div>
         <div>
             <textarea value={props.dialogsPage.newMessageText} onChange={onMessageChange}/>

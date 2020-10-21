@@ -2,7 +2,7 @@ import React from "react";
 import {AddPostAC, onPostChangeAC, PostsDataType} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {RootStateType} from "../../../redux/store";
+import {RootStateType} from "../../../redux/redux-store";
 
 type PropsType = {}
 
@@ -27,3 +27,5 @@ let mapDispatchToProps = (dispatch: any) => {
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer
+
+

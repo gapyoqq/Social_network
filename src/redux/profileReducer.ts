@@ -1,4 +1,4 @@
-import {AddPostACType, OnPostChangeACType, ActionType} from "./store";
+import {ActionType} from "./redux-store";
 
 export type PostsDataType = {
     id: number
@@ -13,11 +13,20 @@ export type ProfilePageType = {
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
+export type AddPostACType = {
+    type: 'ADD-POST'
+}
+export type OnPostChangeACType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
+}
 export const AddPostAC = (): AddPostACType => ({type: 'ADD-POST'})
 export const onPostChangeAC = (newText: string): OnPostChangeACType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: newText
 })
+
+
 
 let initialState: ProfilePageType = {
     postsData: [
@@ -29,24 +38,29 @@ let initialState: ProfilePageType = {
 
 }
 
+
+
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+
+
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newText
-            return stateCopy
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         }
         case ADD_POST: {
-            let stateCopy = {...state}
             let newPost: PostsDataType = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 10
             }
-            stateCopy.postsData = [...state.postsData]
-            stateCopy.postsData.push(newPost)
-            stateCopy.newPostText = ''
-            return stateCopy
+            return {
+                ...state,
+                postsData: [...state.postsData, newPost],
+                newPostText: ''
+            }
         }
         default:
             return state

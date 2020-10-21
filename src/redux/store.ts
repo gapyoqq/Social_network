@@ -1,45 +1,6 @@
-import profileReducer, {PostsDataType, ProfilePageType} from "./profileReducer";
-import dialogsReducer, {DialogsPageType, MessagesDataType} from "./dialogsReducer";
-
-
-
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-}
-
-export type StoreType = {
-    _state: RootStateType
-    getState: () => RootStateType
-    _callSubscriber: () => void
-    subscribe: (observer: () => void) => void
-    dispatch: (action: ActionType) => void
-    _addPost: () => void
-    _addMessage: () => void
-    _updateNewPostText: (newText: string) => void
-    _updateNewMessageText: (newMessageText: string) => void
-
-}
-
-
-
-export type AddPostACType = {
-    type: 'ADD-POST'
-}
-export type OnPostChangeACType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: string
-}
-export type AddMessageACType = {
-    type: 'ADD-MESSAGE'
-}
-export type OnMessageChangeACType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessageText: string
-}
-
-export type ActionType = AddPostACType | OnPostChangeACType | OnMessageChangeACType | AddMessageACType
-
+import profileReducer, {PostsDataType} from "./profileReducer";
+import dialogsReducer, {MessagesDataType} from "./dialogsReducer";
+/*import {ActionType, RootStateType} from "./redux-store";
 
 
 let store: StoreType = {
@@ -117,7 +78,18 @@ let store: StoreType = {
 
 
 
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    _callSubscriber: () => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionType) => void
+    _addPost: () => void
+    _addMessage: () => void
+    _updateNewPostText: (newText: string) => void
+    _updateNewMessageText: (newMessageText: string) => void
 
+}*/
 
 
 
