@@ -23,33 +23,7 @@ export type UsersPageType = {
 
 
 let initialState: UsersPageType = {
-    users: [
-        {
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxHW0JNoujLdX5JIJgkQYQw6XQ1cDEC9dBVQ&usqp=CAU',
-            id: 1,
-            followed: false,
-            fullName: 'Dmitry',
-            status: 'Im a boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxHW0JNoujLdX5JIJgkQYQw6XQ1cDEC9dBVQ&usqp=CAU',
-            id: 2,
-            followed: true,
-            fullName: 'Sasha',
-            status: 'Im a student',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
-        {
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxHW0JNoujLdX5JIJgkQYQw6XQ1cDEC9dBVQ&usqp=CAU',
-            id: 3,
-            followed: false,
-            fullName: 'Maxim',
-            status: 'Im a teacher',
-            location: {city: 'Moscow', country: 'Russia'}
-        }
-    ]
-
+    users:[]
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionType) => {
