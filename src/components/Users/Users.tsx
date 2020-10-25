@@ -9,30 +9,34 @@ type PropsType = {
     usersPage: UsersPageType
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setUsers: (response: any) => void
+    setUsers: (response: UsersPageType) => void
 }
 
-function Users(props: PropsType) {
 
 
-    if (props.usersPage.users.length === 0) {
+const Users = React.memo(
+    class Users extends React.Component<PropsType> {
+    constructor(props: PropsType) {
+        super(props)
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
+            this.props.setUsers(response.data.items)
         })
-
+    }
+    render() {
         return <div>
+            <button onClick={this.getUsers}>Get users</button>
             {
-                props.usersPage.users.map(u => <div key={u.id}>
+                this.props.usersPage.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img className={styles.usersPhoto} src={u.photos.small != null? u.photos.small : userPhoto}/>
+                        <img className={styles.usersPhoto} src={userPhoto}/>
                     </div>
                     {u.followed ?
                         <button onClick={() => {
-                            props.unfollow(u.id)
+                            this.props.unfollow(u.id)
                         }}>UnFollow</button> :
                         <button onClick={() => {
-                            props.follow(u.id)
+                            this.props.follow(u.id)
                         }}>Follow</button>}
 
                 </span>
@@ -51,9 +55,13 @@ function Users(props: PropsType) {
             }
         </div>
     }
-}
+    getUsers = () => {
+        if (this.props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        }
+    }
+})
 
 export default Users
-
-
-

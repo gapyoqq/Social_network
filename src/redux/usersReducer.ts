@@ -8,22 +8,24 @@ type LocationType = {
     city: string
     country: string
 }
-export type UserType = {
-    id: number
-    fullName: string
-    status: string
-    location: LocationType
-    followed: boolean
-    photoUrl: string
 
+export type UserType = {
+    name: string
+    id: number
+    photos: string
+    status?: null
+    followed: boolean
 }
+
 export type UsersPageType = {
     users: Array<UserType>
+    totalCount?: number
+    error?: null
 }
 
 
 let initialState: UsersPageType = {
-    users:[]
+    users: []
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionType) => {
