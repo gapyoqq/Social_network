@@ -13,20 +13,18 @@ type PropsType = {
 }
 
 
-
 const Users = React.memo(
     class Users extends React.Component<PropsType> {
-    constructor(props: PropsType) {
-        super(props)
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            this.props.setUsers(response.data.items)
-        })
-    }
-    render() {
-        return <div>
-            <button onClick={this.getUsers}>Get users</button>
-            {
-                this.props.usersPage.users.map(u => <div key={u.id}>
+        componentDidMount() {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        }
+        render() {
+            return <div>
+                <button onClick={this.getUsers}>Get users</button>
+                {
+                    this.props.usersPage.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img className={styles.usersPhoto} src={userPhoto}/>
@@ -40,7 +38,7 @@ const Users = React.memo(
                         }}>Follow</button>}
 
                 </span>
-                        <span>
+                            <span>
                     <span>
                         <div>{u.name}</div><div>{u.status}</div>
                     </span>
@@ -50,18 +48,19 @@ const Users = React.memo(
                     </div><div></div>
                     </span>
                 </span>
-                    </div>
-                )
-            }
-        </div>
-    }
-    getUsers = () => {
-        if (this.props.usersPage.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                this.props.setUsers(response.data.items)
-            })
+                        </div>
+                    )
+                }
+            </div>
         }
-    }
-})
+        getUsers = () => {
+            if (this.props.usersPage.users.length === 0) {
+                axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                    this.props.setUsers(response.data.items)
+                })
+            }
+        }
+    })
+
 
 export default Users
