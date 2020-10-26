@@ -1,33 +1,60 @@
 import React from "react"
-import {AppStateType, RootStateType} from "../../redux/redux-store";
 import {UsersPageType, UserType} from "../../redux/usersReducer";
 import styles from './users.module.css'
 import axios from 'axios'
 import userPhoto from '../..//assets/images/Avatar.jpg'
 
 type PropsType = {
-    usersPage: UsersPageType
+    users: Array<UserType>
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setUsers: (response: UsersPageType) => void
+    setUsers: (users: Array<UserType>) => void
+    pageSize: number
+    totalCount: number
+    currentPage: number
+    setCurrentPage: (currentPage: number) => void
+    setTotalCount: (totalCount: number) => void
 }
 
 
 const Users = React.memo(
     class Users extends React.Component<PropsType> {
         componentDidMount() {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalCount(response.data.totalCount)
+            })
+        }
+
+        onPageChanged = (currentPage: number) => {
+            this.props.setCurrentPage(currentPage)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
                 this.props.setUsers(response.data.items)
             })
         }
+
         render() {
+
+            let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
+            let pages = []
+            for (let i = 1; i <= pagesCount; i++) {
+                pages.push(i)
+            }
+
             return <div>
-                <button onClick={this.getUsers}>Get users</button>
+                <div>
+                    {pages.map(p => {
+                        return <span onClick={() => {
+                            this.onPageChanged(p)
+                        }}
+                                     className={this.props.currentPage === p ? styles.selectedPage : ''}>{p}</span>
+                    })}
+                </div>
                 {
-                    this.props.usersPage.users.map(u => <div key={u.id}>
+                    this.props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img className={styles.usersPhoto} src={userPhoto}/>
+                        <img className={styles.usersPhoto} src={u.photos.small != null ? u.photos.small : userPhoto}/>
                     </div>
                     {u.followed ?
                         <button onClick={() => {
@@ -52,13 +79,6 @@ const Users = React.memo(
                     )
                 }
             </div>
-        }
-        getUsers = () => {
-            if (this.props.usersPage.users.length === 0) {
-                axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                    this.props.setUsers(response.data.items)
-                })
-            }
         }
     })
 
