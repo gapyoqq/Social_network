@@ -25,8 +25,8 @@ export type OnMessageChangeACType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 }
-export const AddMessageAC = (): AddMessageACType => ({type: 'ADD-MESSAGE'})
-export const onMessageChangeAC = (newMessageText: string): OnMessageChangeACType => ({
+export const addMessage = (): AddMessageACType => ({type: 'ADD-MESSAGE'})
+export const onMessageChange = (newMessageText: string): OnMessageChangeACType => ({
     type: 'UPDATE-NEW-MESSAGE-TEXT',
     newMessageText: newMessageText
 

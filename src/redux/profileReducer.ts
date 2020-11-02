@@ -20,8 +20,8 @@ export type OnPostChangeACType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
-export const AddPostAC = (): AddPostACType => ({type: 'ADD-POST'})
-export const onPostChangeAC = (newText: string): OnPostChangeACType => ({
+export const addPost = (): AddPostACType => ({type: 'ADD-POST'})
+export const onPostChange = (newText: string): OnPostChangeACType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: newText
 })
