@@ -7,7 +7,8 @@ export type PostsDataType = {
 }
 export type ProfilePageType = {
     postsData: PostsDataType[]
-    newPostText: string
+    newPostText: string,
+    profile: ProfileType
 }
 
 const ADD_POST = 'ADD-POST'
@@ -20,12 +21,36 @@ export type OnPostChangeACType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
+export type SetUserProfileACType = {
+    type: 'SET-USERS-PROFILE',
+    profile: ProfileType
+}
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string,
+        large: string
+    }
+}
+
 export const addPost = (): AddPostACType => ({type: 'ADD-POST'})
 export const onPostChange = (newText: string): OnPostChangeACType => ({
     type: 'UPDATE-NEW-POST-TEXT',
     newText: newText
 })
-
+export const setUserProfile = (profile: ProfileType): SetUserProfileACType => ({type: 'SET-USERS-PROFILE', profile})
 
 
 let initialState: ProfilePageType = {
@@ -34,10 +59,16 @@ let initialState: ProfilePageType = {
         {id: 2, likesCount: 15, message: 'Love you)'},
         {id: 3, likesCount: 11, message: 'Np'}
     ],
-    newPostText: ''
-
+    newPostText: '',
+    profile: {
+        userId: 1,
+        contacts: {facebook: 's', github: 'b', instagram: 'b', mainLink: 'b', twitter: 'b', website: 'b', youtube: 'b'},
+        fullName: 'b',
+        lookingForAJob: true,
+        lookingForAJobDescription: 'no',
+        photos: {large: '1', small: 'b'}
+    },
 }
-
 
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType) => {
@@ -61,6 +92,9 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
                 postsData: [...state.postsData, newPost],
                 newPostText: ''
             }
+        }
+        case "SET-USERS-PROFILE": {
+            return {...state, profile: action.profile}
         }
         default:
             return state

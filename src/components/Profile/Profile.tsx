@@ -1,12 +1,12 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType} from "../../redux/profileReducer";
+import {ProfilePageType, ProfileType} from "../../redux/profileReducer";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ActionType, StoreType} from "../../redux/redux-store";
 import MyPosts from "./MyPosts/MyPosts";
 
 type PropsType = {
-
+    profile: ProfileType
 }
 
 
@@ -15,7 +15,7 @@ type PropsType = {
 
 function Profile(props: PropsType) {
     return <div>
-        <ProfileInfo />
+        <ProfileInfo profile={props.profile} />
         <MyPostsContainer />
     </div>
 

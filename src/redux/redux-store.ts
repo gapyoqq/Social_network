@@ -1,5 +1,10 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer, {AddPostACType, OnPostChangeACType, ProfilePageType} from "./profileReducer";
+import profileReducer, {
+    AddPostACType,
+    OnPostChangeACType,
+    ProfilePageType,
+    SetUserProfileACType
+} from "./profileReducer";
 import dialogsReducer, {AddMessageACType, DialogsPageType, OnMessageChangeACType} from "./dialogsReducer";
 import usersReducer, {
     FollowACType,
@@ -15,8 +20,18 @@ export type RootStateType = {
     usersPage: UsersPageType
 }
 
-export type ActionType = AddPostACType | OnPostChangeACType | OnMessageChangeACType | AddMessageACType | UnFollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalCountACType | ToggleIsFetchingACType
-
+export type ActionType =
+    SetUserProfileACType
+    | AddPostACType
+    | OnPostChangeACType
+    | OnMessageChangeACType
+    | AddMessageACType
+    | UnFollowACType
+    | FollowACType
+    | SetUsersACType
+    | SetCurrentPageACType
+    | SetTotalCountACType
+    | ToggleIsFetchingACType
 
 
 let reducers = combineReducers({
@@ -31,7 +46,7 @@ export type AppStateType = ReturnType<RootReducerType>
 
 export type StoreType = typeof store
 
-let store  = createStore(reducers)
+let store = createStore(reducers)
 
 
 export default store
