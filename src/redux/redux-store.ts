@@ -4,7 +4,7 @@ import dialogsReducer, {AddMessageACType, DialogsPageType, OnMessageChangeACType
 import usersReducer, {
     FollowACType,
     SetCurrentPageACType, SetTotalCountACType,
-    SetUsersACType,
+    SetUsersACType, ToggleIsFetchingACType,
     UnFollowACType,
     UsersPageType
 } from "./usersReducer";
@@ -15,7 +15,7 @@ export type RootStateType = {
     usersPage: UsersPageType
 }
 
-export type ActionType = AddPostACType | OnPostChangeACType | OnMessageChangeACType | AddMessageACType | UnFollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalCountACType
+export type ActionType = AddPostACType | OnPostChangeACType | OnMessageChangeACType | AddMessageACType | UnFollowACType | FollowACType | SetUsersACType | SetCurrentPageACType | SetTotalCountACType | ToggleIsFetchingACType
 
 
 
