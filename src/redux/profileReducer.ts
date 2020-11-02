@@ -66,14 +66,12 @@ let initialState: ProfilePageType = {
         fullName: 'b',
         lookingForAJob: true,
         lookingForAJobDescription: 'no',
-        photos: {large: '1', small: 'b'}
+        photos: {large: 'https://social-network.samuraijs.com/activecontent/images/users/12188/user.jpg?v=0', small: 'b'}
     },
 }
 
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionType) => {
-
-
     switch (action.type) {
         case UPDATE_NEW_POST_TEXT: {
             return {

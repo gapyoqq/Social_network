@@ -20,7 +20,7 @@ export function ProfileInfo(props: PropsType) {
                  src='https://funart.pro/uploads/posts/2020-04/1587637095_8-p-temno-serie-foni-34.jpg'/>
         </div>
         <div className={classes.descriptionBlock}>
-            <img src={props.profile.photos.large}/>
+            <img src={props.profile.photos.small}/>
             ava+description
         </div>
     </div>
