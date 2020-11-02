@@ -6,11 +6,15 @@ import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import SettingsIcon from "@material-ui/icons/Settings";
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import GroupIcon from '@material-ui/icons/Group';
 
 function Navbar() {
     return <nav className={classes.nav}>
         <div className={classes.item}>
             <NavLink to='/profile' activeClassName={classes.active}><HomeIcon/>Profile</NavLink>
+        </div>
+        <div className={`${classes.item} ${classes.active}`}>
+            <NavLink to='/users' activeClassName={classes.active}><GroupIcon/>Users</NavLink>
         </div>
         <div className={`${classes.item} ${classes.active}`}>
             <NavLink to='/dialogs' activeClassName={classes.active}><MessageIcon/>Messages</NavLink>

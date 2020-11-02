@@ -9,11 +9,9 @@ import UsersContainer from "./components/Users/UsersContainer";
 
 
 
-type PropsType = {
-}
 
 
-function App(props: PropsType) {
+function App() {
     return (
         <div className="app-wrapper">
             <Header/>
