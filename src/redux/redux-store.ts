@@ -13,6 +13,7 @@ import usersReducer, {
     UnFollowACType,
     UsersPageType
 } from "./usersReducer";
+import {authReducer, SetUserDataType} from "./auth-reducer";
 
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -32,12 +33,14 @@ export type ActionType =
     | SetCurrentPageACType
     | SetTotalCountACType
     | ToggleIsFetchingACType
+    | SetUserDataType
 
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    /*auth: authReducer*/
 })
 
 export type RootReducerType = typeof reducers
